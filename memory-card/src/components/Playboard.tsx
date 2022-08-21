@@ -6,19 +6,19 @@ export function Playboard(props: any){
 
     const [score, setScore] = useState(0)
 
-    const setScoreFunction = () => {
-        console.log(score)
-        setScore(score + 1) }
+    function setScoreFunction(){
+        setScore(score + 1)
+    }
        
     const resetScore = () => setScore(0)
 
     const [array, setArray] = useState([
         <Card name="A" setScoreFunction = {setScoreFunction} resetScore={resetScore} key="A" handleShuffle={handleShuffle}></Card>,
         <Card name="B" setScoreFunction = {setScoreFunction} resetScore={resetScore} key="B" handleShuffle={handleShuffle}></Card>,
-        <Card name="C" setScoreFunction = {setScoreFunction} resetScore={resetScore}key="C" handleShuffle={handleShuffle}></Card>,
-        <Card name="D" setScoreFunction = {setScoreFunction} resetScore={resetScore}key="D" handleShuffle={handleShuffle}></Card>,
-        <Card name="E" setScoreFunction = {setScoreFunction} resetScore={resetScore}key="E" handleShuffle={handleShuffle}></Card>,
-        <Card name="F" setScoreFunction = {setScoreFunction} resetScore={resetScore}key="F" handleShuffle={handleShuffle}></Card>,
+        <Card name="C" setScoreFunction = {setScoreFunction}resetScore={resetScore} key="C" handleShuffle={handleShuffle}></Card>,
+        <Card name="D" setScoreFunction = {setScoreFunction} resetScore={resetScore} key="D" handleShuffle={handleShuffle}></Card>,
+        <Card name="E" setScoreFunction = {setScoreFunction} resetScore={resetScore} key="E" handleShuffle={handleShuffle}></Card>,
+        <Card name="F" setScoreFunction = {setScoreFunction} resetScore={resetScore} key="F" handleShuffle={handleShuffle}></Card>,
         ])
 
         function handleShuffle(){
@@ -36,10 +36,7 @@ export function Playboard(props: any){
             }
             return array;
           }
-
-
-
-
+    
     return (
     <div className="playboard">
         {array}
