@@ -3,15 +3,14 @@ import { useState } from "react";
 export function Card(props) {
   const [clicked, setClicked] = useState(false);
 
-  const used = [];
-
   const handleClick = (e) => {
     if (clicked) {
-      alert("You lose!");
+      alert("Wrong");
       props.resetScore();
     } else {
       setClicked(true);
       props.setScoreFunction();
+      props.handleShuffle();
     }
   };
 
