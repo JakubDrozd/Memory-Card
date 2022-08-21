@@ -3,7 +3,7 @@ import { useState } from "react";
 export function Card(props) {
   const [clicked, setClicked] = useState(false);
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     if (clicked) {
       alert("Wrong");
       props.resetScore();
