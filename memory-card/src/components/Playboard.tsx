@@ -6,17 +6,17 @@ export function Playboard(props: any){
 
     const [score, setScore] = useState(0)
 
-     function handleClick(){
-        setScore(score + 1);
-    }
+    const setScoreFunction = () => setScore(score + 1)
+
+    const resetScore = () => setScore(0)
 
     const array = [
-    <Card name="A" onClick={handleClick}></Card>,
-    <Card name="B"></Card>,
-    <Card name="C"></Card>,
-    <Card name="D"></Card>,
-    <Card name="E"></Card>,
-    <Card name="F"></Card>
+    <Card name="A" setScoreFunction = {setScoreFunction} resetScore={resetScore}></Card>,
+    <Card name="B" setScoreFunction = {setScoreFunction} resetScore={resetScore}></Card>,
+    <Card name="C" setScoreFunction = {setScoreFunction} resetScore={resetScore}></Card>,
+    <Card name="D" setScoreFunction = {setScoreFunction} resetScore={resetScore}></Card>,
+    <Card name="E" setScoreFunction = {setScoreFunction} resetScore={resetScore}></Card>,
+    <Card name="F" setScoreFunction = {setScoreFunction} resetScore={resetScore}></Card>
     ]
 
 
@@ -26,6 +26,8 @@ export function Playboard(props: any){
         array.splice(index, 1 )
         return random
     }
+
+   
 
 
     return (
