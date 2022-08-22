@@ -8,8 +8,9 @@ export function Card(props) {
       alert("Wrong");
       props.resetScore();
     } else {
+      console.log(props.score);
       setClicked(true);
-      props.setScoreFunction();
+      props.setScoreFunction(props.score);
       props.handleShuffle();
     }
   };
