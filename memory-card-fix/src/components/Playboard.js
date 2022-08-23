@@ -20,19 +20,30 @@ export function Playboard(props) {
     setCards(shuffleArray(cards));
   }, [score]);
 
-  async function handleCardClick(e) {
+  function handleCardClick(e) {
+    console.log(clicked);
     if (clicked.includes(e.target.querySelector("h1").textContent)) {
-      setClicked([]);
-      setScore(0);
+      resetGame();
     } else {
       increment();
       clicked.push(e.target.querySelector("h1").textContent);
     }
   }
 
+  function resetGame() {
+    setClicked([]);
+    setScore(0);
+  }
+
   const shuffleArray = (array) => {
     return [...array].sort(() => Math.random() - 0.5);
   };
+
+  useEffect(() => {
+    if (score === 0) {
+      setClicked([]);
+    }
+  }, [score]);
 
   const [cards, setCards] = useState([
     <Card name="A" key={1} handleCardClick={handleCardClick}></Card>,
@@ -47,7 +58,6 @@ export function Playboard(props) {
     <div>
       <div className="container">{cards}</div>
       <Scoreboard score={score}></Scoreboard>
-      <button onClick={() => console.log(clicked)}>Check array</button>
     </div>
   );
 }
