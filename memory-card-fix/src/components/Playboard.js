@@ -41,16 +41,21 @@ export function Playboard(props) {
   }, []);
 
   function handleCardClick(e) {
+    console.log(clicked);
     if (clicked.includes(e.target.querySelector("h1").textContent)) {
+      console.log(clicked);
       resetGame();
     } else {
       increment();
       clicked.push(e.target.querySelector("h1").textContent);
+      console.log(clicked);
     }
   }
 
   function resetGame() {
     setScore(0);
+    setClicked([]);
+    console.log(clicked);
   }
 
   const shuffleArray = (array) => {
@@ -61,7 +66,6 @@ export function Playboard(props) {
     <div>
       <div className="container">{cards}</div>
       <Scoreboard score={score} bestScore={bestScore}></Scoreboard>
-      <button onClick={() => console.log(clicked)}>Check array</button>
     </div>
   );
 }
