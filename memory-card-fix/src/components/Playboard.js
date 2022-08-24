@@ -3,47 +3,67 @@ import { Card } from "./Card";
 import "../styles/Playboard.css";
 import { Scoreboard } from "./Scoreboard";
 
-const shuffleArray = (array) => {
-  return [...array].sort(() => Math.random() - 0.5);
-};
-
-function initializeCards() {
-  return shuffleArray(["A", "B", "C", "D", "E", "F"]);
-}
-
-export function Playboard() {
+export function Playboard(props) {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+
   const [clicked, setClicked] = useState([]);
-  const [cards, setCards] = useState(initializeCards);
+  const [cards, setCards] = useState([
+    <Card name="A" key={1} handleCardClick={handleCardClick}></Card>,
+    <Card name="B" key={2} handleCardClick={handleCardClick}></Card>,
+    <Card name="C" key={3} handleCardClick={handleCardClick}></Card>,
+    <Card name="D" key={4} handleCardClick={handleCardClick}></Card>,
+    <Card name="E" key={5} handleCardClick={handleCardClick}></Card>,
+    <Card name="F" key={6} handleCardClick={handleCardClick}></Card>,
+  ]);
+
+  const increment = () => {
+    setScore((c) => c + 1);
+  };
+
+  function checkScore() {
+    if (score > bestScore) {
+      setBestScore(score);
+    }
+  }
 
   useEffect(() => {
-    setBestScore((bestScore) => Math.max(bestScore, score));
+    setCards(shuffleArray(cards));
+  }, []);
+
+  useEffect(() => {
+    setCards(shuffleArray(cards));
   }, [score]);
 
-  function handleCardClick(name) {
-    if (clicked.includes(name)) {
+  useEffect(() => {
+    setClicked([]);
+  }, []);
+
+  function handleCardClick(e) {
+    console.log(clicked);
+    if (clicked.includes(e.target.querySelector("h1").textContent)) {
+      console.log(clicked);
       resetGame();
     } else {
-      setScore((c) => c + 1);
-      setClicked((c) => [...c, name]);
-      setCards((cards) => shuffleArray(cards));
+      increment();
+      clicked.push(e.target.querySelector("h1").textContent);
+      console.log(clicked);
     }
   }
 
   function resetGame() {
     setScore(0);
     setClicked([]);
-    setCards(initializeCards());
+    console.log(clicked);
   }
+
+  const shuffleArray = (array) => {
+    return [...array].sort(() => Math.random() - 0.5);
+  };
 
   return (
     <div>
-      <div className="container">
-        {cards.map((name) => (
-          <Card name={name} key={name} handleCardClick={handleCardClick}></Card>
-        ))}
-      </div>
+      <div className="container">{cards}</div>
       <Scoreboard score={score} bestScore={bestScore}></Scoreboard>
     </div>
   );
