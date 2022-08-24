@@ -19,6 +19,10 @@ export function Playboard() {
     setBestScore((bestScore) => Math.max(bestScore, score));
   }, [score]);
 
+  useEffect(() => {
+    setCards((cards) => shuffleArray(cards));
+  }, []);
+
   function handleCardClick(name) {
     if (clicked.includes(name)) {
       resetGame();
