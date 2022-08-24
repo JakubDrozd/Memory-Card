@@ -27,18 +27,19 @@ export function Playboard(props) {
     }
   }
 
+  function handleStateChange(state) {
+    setClicked(state);
+  }
+
   useEffect(() => {
     setCards(shuffleArray(cards));
+    handleStateChange();
   }, []);
 
   useEffect(() => {
     setCards(shuffleArray(cards));
     checkScore();
   }, [score]);
-
-  useEffect(() => {
-    setClicked([]);
-  }, []);
 
   function handleCardClick(e) {
     console.log(clicked);
